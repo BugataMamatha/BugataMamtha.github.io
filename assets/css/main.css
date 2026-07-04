@@ -95,6 +95,27 @@ margin-right: 0px;
 		box-sizing: border-box;
 	}
 
+	:root {
+		--sidebar-width: 20%;
+	}
+
+	body {
+		position: relative;
+		overflow-x: hidden;
+	}
+
+	body::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: var(--sidebar-width);
+		height: 100vh;
+		background: url("../../images/fulls/BG.jpeg") center center / cover no-repeat;
+		pointer-events: none;
+		z-index: 0;
+	}
+
 	*, *:before, *:after {
 		box-sizing: inherit;
 	}
@@ -2293,16 +2314,12 @@ margin-right: 0px;
 		-ms-align-items: -ms-flex-end;
 		align-items: flex-end;
 		justify-content: space-between;
-		 background-color: #1f1815; 
+		  
 		 /* background-color: #949190;  */
-		background-attachment: scroll,								scroll;
-		 background-image: url("images/overlay.png"), url("../../images/fulls/BG.jpeg");   
-		 
-		background-position: center center, top left; /* Set the position of each image */
-		background-size: cover, cover;
-		/* background-position: top left,							top left;
-		background-repeat: repeat,								no-repeat; */
-		background-size: auto,100%;
+		background-attachment: scroll;
+		background-image: none;
+		background-position: center center;
+		background-size: cover;
 		color: rgba(255, 255, 255, 0.5);
 		height: 100%;
 		left: 0;
@@ -2310,19 +2327,11 @@ margin-right: 0px;
 		position: fixed;
 		text-align: right;
 		top: 0;
-		width: 0%;
+		width: var(--sidebar-width);
+		z-index: 2;
+		overflow: hidden;
 		
 	}
-	.background-image {
-		background-size: cover, cover;
-		background-position: center, center;
-		background-repeat: no-repeat, no-repeat;
-		background-attachment: fixed, fixed;
-	  }
-	  
-	  .background-image::nth-layer(2) {
-		filter: blur(50px); /* Adjust the blur radius as needed */
-	  }
 	  
 		#header > * {
 			-moz-flex-shrink: 0;
@@ -2419,8 +2428,19 @@ margin-right: 0px;
 
 /* Footer */
 
+	#footer {
+		background: transparent;
+		bottom: 0;
+		left: 0;
+		padding: 2em 4em;
+		position: fixed;
+		text-align: right;
+		width: var(--sidebar-width);
+		z-index: 2;
+	}
+
 	#footer .icons {
-		margin: 5em 0 0 0;
+		margin: 0;
 	}
 
 		#footer .icons a {
@@ -2492,10 +2512,12 @@ margin-right: 0px;
 /* Main */
 
 	#main {
-		margin-left: 20%;
+		position: relative;
+		z-index: 1;
+		margin-left: var(--sidebar-width);
 		max-width: 60em;
 		padding: 2em 2em 2em 3em; 
-		width: calc(100%);
+		width: calc(100% - var(--sidebar-width));
 	}
 
 		 #main > section {
@@ -2528,11 +2550,14 @@ margin-right: 0px;
 
 	@media screen and (max-width: 1280px) {
 
+		:root {
+			--sidebar-width: 30%;
+		}
+
 		/* Header */
 
 			#header {
 				padding: 6em 3em 3em 3em;
-				width: 30%;
 			}
 
 				#header h1 {
@@ -2549,6 +2574,10 @@ margin-right: 0px;
 
 		/* Footer */
 
+			#footer {
+				padding: 2em 3em;
+			}
+
 			#footer .copyright li {
 				border-left-width: 0;
 				display: block;
@@ -2560,10 +2589,8 @@ margin-right: 0px;
 		/* Main */
 
 			#main {
-				margin-left:30%;
 				max-width: none; 
-				/* padding: 6em 3em 3em 3em; */
-				width: calc(100% - 30%); 
+				width: calc(100% - var(--sidebar-width)); 
 			}
 
 	}
@@ -2571,6 +2598,10 @@ margin-right: 0px;
 /* Medium */
 
 	@media screen and (max-width: 980px) {
+
+		:root {
+			--sidebar-width: 100%;
+		}
 
 		/* Basic */
 
@@ -2587,9 +2618,8 @@ margin-right: 0px;
 		/* Header */
 
 			#header {
+				
 				background-attachment: scroll;
-				background-position: top left, center center;
-				background-size: auto,		cover;
 				left: auto;
 				padding: 6em 4em;
 				position: relative;
@@ -2610,13 +2640,7 @@ margin-right: 0px;
 		/* Footer */
 
 			#footer {
-				background-attachment: scroll;
-				/* background-color: #1f1815; */
-				
-				/* background-image: url("images/overlay.png"), url("../../images/fulls/bg1.jpg"); */
-				background-position: top left,						bottom center;
-				background-repeat: repeat,							no-repeat;
-				background-size: auto,							cover;
+				background: transparent;
 				bottom: auto;
 				left: auto;
 				padding: 4em 4em 6em 4em;
@@ -2648,6 +2672,12 @@ margin-right: 0px;
 				padding: 6em 4em;
 				width: 100%;
 			} */
+
+			#main {
+				margin: 0;
+				padding: 6em 4em;
+				width: 100%;
+			}
 
 	}
 
